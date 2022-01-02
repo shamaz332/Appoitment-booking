@@ -1,15 +1,17 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
 // import defaultDp from "./../../images/defaultDp.png";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import React, { useState } from "react";
+
+import { connect } from "react-redux";
 import { update_profile } from "./../../actions/ProfileActions";
+
 const EditProfile = ({ profile, update_profile }) => {
   const { username, email, info } = profile.profile;
   // const [Profileimg, setProfileimg] = useState(defaultDp);
   const [Profileform, setProfileform] = useState({
     fullname: info ? info.fullname : "",
     bio: info ? info.bio : "",
-    college: info ? info.college : "",
+   
   });
 
   const handleChange = (e) => {
@@ -47,23 +49,11 @@ const EditProfile = ({ profile, update_profile }) => {
         />
       </FormGroup>
       <FormGroup>
-        <Label>Bio</Label>
-        <Input
-          type="textarea"
-          name="bio"
+        <Label>Appointment Slots</Label>
+      
+          <input type="datetime-local"  name="bio"
           value={Profileform.bio}
-          onChange={handleChange}
-        />
-      </FormGroup>
-
-      <FormGroup>
-        <Label>college</Label>
-        <Input
-          type="text"
-          name="college"
-          value={Profileform.college}
-          onChange={handleChange}
-        />
+          onChange={handleChange}></input>
       </FormGroup>
 
       <Button onClick={handleSubmit} className="mt-2">

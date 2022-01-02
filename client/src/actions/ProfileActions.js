@@ -1,5 +1,6 @@
-import axios from "axios";
 import * as types from "./types";
+
+import axios from "axios";
 import { returnErrors } from "./ErrorActions";
 import { tokenConfig } from "./AuthActions";
 // import { tokenConfig } from "./AuthActions";

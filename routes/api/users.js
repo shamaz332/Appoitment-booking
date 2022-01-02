@@ -66,7 +66,10 @@ router.post("/user", auth, (req, res) => {
   const { username, info } = req.body;
   User.findOneAndUpdate(
     { username: username }, // filter
-    { $set: { info: info } }, // update if found or upsert property
+
+  
+
+    { $push: { info: info } }, // update if found or upsert property
     { new: true, select: "-password" }, // Returne doc as Updated
     (err, doc) => {
       if (err) res.status(500).json({ msg: "Something Went Wrong :(" });

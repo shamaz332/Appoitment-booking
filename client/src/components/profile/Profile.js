@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
+import { edit_profile, get_profile } from "./../../actions/ProfileActions";
+
 import AllPosts from "./../AllPosts";
+import { Button } from "reactstrap";
+import EditProfile from "./EditProfile";
+import Loader from "./../Loader";
 import { connect } from "react-redux";
 import defaultDp from "./../../images/defaultDp.png";
-import EditProfile from "./EditProfile";
-import { Button } from "reactstrap";
-import Loader from "./../Loader";
-import { get_profile, edit_profile } from "./../../actions/ProfileActions";
+
 const Profile = ({ match, auth, profile, get_profile, edit_profile }) => {
   useEffect(() => {
     get_profile(match.params.username);
@@ -43,17 +45,11 @@ const Profile = ({ match, auth, profile, get_profile, edit_profile }) => {
           </div>
 
           <div className="text-muted display-5">{profile.profile?.email}</div>
-          <div className="text-muted text-truncate display-5">
-            Bio : {profile.profile?.info?.bio}
-          </div>
-          <div className="text-muted text-truncate display-5">
-            College : {profile.profile?.info?.college}
-          </div>
         </div>
       </div>
       <hr />
-      <h2 className="text-muted m-4">Posts of {match.params.username}</h2>
-      <AllPosts author={match.params.username} />
+      <h2 className="text-muted m-4">Appointment Requests {match.params.username}</h2>
+      {/* <AllPosts author={match.params.username} /> */}
     </div>
   );
 };

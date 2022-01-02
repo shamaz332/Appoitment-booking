@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import { Toggle_Foucs, Toggle_modal } from "./../actions/ToggleActions";
-import { logout } from "./../actions/AuthActions";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavLink,
-  Container,
   Button,
-  DropdownToggle,
-  UncontrolledDropdown,
+  Collapse,
+  Container,
   DropdownItem,
   DropdownMenu,
+  DropdownToggle,
+  Nav,
+  NavLink,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  UncontrolledDropdown,
 } from "reactstrap";
+import React, { useState } from "react";
+import { Toggle_Foucs, Toggle_modal } from "./../actions/ToggleActions";
+
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "./../actions/AuthActions";
 
 const AppNavbar = (props) => {
   const [collapsed, setCollapsed] = useState(true); // navbar collapse
@@ -112,7 +113,7 @@ const AppNavbar = (props) => {
           <NavbarToggler onClick={toggleNavbar} className="mr-2" />
           <Collapse isOpen={!collapsed} navbar>
             <Nav className="ml-auto" navbar>
-              <NavLink
+              {/* <NavLink
                 tag={Link}
                 to="/api/posts"
                 onClick={closeNavbar}
@@ -137,7 +138,7 @@ const AppNavbar = (props) => {
                 }}
               >
                 New Post
-              </NavLink>
+              </NavLink> */}
 
               {props.auth.isAuthenticated
                 ? [logoutBtn]

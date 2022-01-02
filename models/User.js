@@ -17,9 +17,8 @@ const UserSchema = new Schema(
       required: true,
     },
     info: {
-      type: Object,
+      type: Array,
     },
-    comments: { type: Array },
   },
   { timestamps: true }
 );
