@@ -10,6 +10,19 @@ const auth = require("../../middleware/auth");
 // User model
 const User = require("../../models/User");
 
+router.get('/usersList', function(req, res) {
+  User.find({}, function(err, users) {
+    var userMap = {};
+
+    users.forEach(function(user) {
+      userMap[user._id] = user;
+    });
+
+    res.send(userMap);  
+    console.log(userMap)
+  });
+});
+
 // @route api/users
 // @descrption register a new user
 // @access Public
@@ -66,9 +79,6 @@ router.post("/user", auth, (req, res) => {
   const { username, info } = req.body;
   User.findOneAndUpdate(
     { username: username }, // filter
-
-  
-
     { $push: { info: info } }, // update if found or upsert property
     { new: true, select: "-password" }, // Returne doc as Updated
     (err, doc) => {

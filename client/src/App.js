@@ -26,9 +26,9 @@ function App() {
           <AppNavbar />
           <Container>
             <Switch>
-              <Route path="/api/posts/newpost" component={AddPost} />
+              {/* <Route path="/api/posts/newpost" component={AddPost} />
               <Route path="/api/posts/:id" exact component={SinglePost} />
-              <Route path="/api/posts" component={Allposts} />
+              <Route path="/api/posts" component={Allposts} /> */}
               <Route path="/api/users/:username" exact component={Profile} />       
               <Route path="/" component={Home} />
             </Switch>
