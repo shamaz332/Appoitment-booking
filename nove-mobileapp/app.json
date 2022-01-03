@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "nove-mobileapp",
+    "slug": "nove-mobileapp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "nove-mobileapp"
+}
