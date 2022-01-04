@@ -1,43 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text } from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
 
 import axios from 'axios';
 
 const FetchALLSellers = () => {
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: response } = await axios.get('http://192.168.8.102:5000/api/users/usersList');
+        const { data: response } = await axios.get('http://192.168.8.101:5000/api/users/usersList');
         console.log(response)
-        alert(JSON.stringify(response))
-        setData(JSON.stringify(response));
+
+        setData(response);
       } catch (error) {
         console.error(error)
       }
       setLoading(false);
     };
     
-console.log(data)
+
     fetchData();
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-
-        
-      </ScrollView>
-    </SafeAreaView>
+    <View>
+      {Object.entries(data).map(([key, value]) => {
+        <View>{value}</View>
+    // Pretty straightforward - use key for the key and value for the value.
+    // Just to clarify: unlike object destructuring, the parameter names don't matter here.
+})}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    
     paddingTop: StatusBar.currentHeight,
   },
   scrollView: {

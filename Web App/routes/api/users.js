@@ -12,13 +12,7 @@ const User = require("../../models/User");
 
 router.get('/usersList', function(req, res) {
   User.find({}, function(err, users) {
-    var userMap = {};
-console.log(users)
-    users.forEach(function(user) {
-      userMap[user._id] = user;
-    });
-
-    res.send(userMap);  
+    res.send(users);  
   });
 });
 
