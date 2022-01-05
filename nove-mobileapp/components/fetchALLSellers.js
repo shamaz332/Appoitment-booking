@@ -13,16 +13,17 @@ import axios from "axios";
 
 const FetchALLSellers = () => {
   const [data, setData] = useState([]);
+  const [filteredText, setFilteredText] = useState(data);
   const [loading, setLoading] = useState(false);
-  const [filteredData, setFilteredData] = useState(data);
+  const [search, setSearch] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data: response } = await axios.get(
           "http://192.168.8.101:5000/api/users/usersList"
         );
-        setFilteredData(response);
         setData(response);
+        setFilteredText(response);
       } catch (error) {
         console.error(error);
       }
@@ -30,22 +31,37 @@ const FetchALLSellers = () => {
     };
     fetchData();
   }, []);
-  const handleSearch = (e) => {
-    console.log(e.target.value);
-    let value = e.target.value;
-    let result = [];
-    console.log(value);
-    result = data.filter((da) => {
-      return da.username.search(value) != -1;
-    });
-    setFilteredData(result);
+
+  const searchFilterFunction = (text) => {
+    if (text === "" || !text) {
+      setFilteredText(data);
+      setSearch(text);
+    } else if (text) {
+      const newData = data.filter(function (item) {
+        const itemData = item.username
+          ? item.username.toUpperCase()
+          : "".toUpperCase();
+        const textData = text.toUpperCase();
+        console.log(itemData);
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredText(newData);
+      setSearch(text);
+    } else {
+      setData(data);
+      setSearch(text);
+    }
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <Input placeholder="Search sellers" />
-        <TextInput onChange={(e) => handleSearch(e)} />
-        {filteredData.map((value) => {
+        <Input
+          onChangeText={(text) => searchFilterFunction(text)}
+          value={search}
+          placeholder="Search sellers"
+        />
+        {filteredText.map((value) => {
           return (
             <View key={value._id} style={{ width: "100%" }}>
               <Card>
