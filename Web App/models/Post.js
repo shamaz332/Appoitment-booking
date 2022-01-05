@@ -3,25 +3,15 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema(
   {
-    title: {
+    description: {
       type: String,
-      required: true,
     },
-    body: {
+    sellerId: {
       type: String,
-      required: true,
     },
-    snippet: {
+    status: {
       type: String,
-      required: true,
     },
-    author: {
-      type: String,
-      required: true,
-    },
-    comments: { type: Array },
-    views: { type: Number },
-    votes: { type: Number },
   },
   { timestamps: true }
 );

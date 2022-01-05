@@ -22,14 +22,11 @@ router.get("/", (req, res) => {
 // @descrption Post a blogpost
 // @access Private
 router.post("/", auth, (req, res) => {
-  const { title, body, snippet, author } = req.body;
+  const { description, sellerId, status } = req.body;
   const newpost = new Post({
-    title,
-    body,
-    snippet,
-    author,
-    views: 0,
-    votes: 0,
+    description,
+    sellerId,
+    status,
   });
   newpost
     .save()
