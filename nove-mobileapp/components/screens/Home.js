@@ -97,11 +97,11 @@ export default function ({ navigation }) {
                     <Card>
                       <Card.Title>{value.username}</Card.Title>
                       <Button
-                        text="Book Appointment"
+                        text="Book"
                         onPress={() =>
                           navigation.navigate('SecondScreen', {
-                            screen: 'SecondScreen',
-                            params: { user: value },
+                           
+                            user: value ,
                           })
                         }
                         style={{

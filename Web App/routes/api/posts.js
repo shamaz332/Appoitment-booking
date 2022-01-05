@@ -21,11 +21,13 @@ router.get("/", (req, res) => {
 // @route api/posts
 // @descrption Post a blogpost
 // @access Private
-router.post("/", auth, (req, res) => {
-  const { description, sellerId, status } = req.body;
+router.post("/", (req, res) => {
+  const { description, senderName, slot, status, sellerId } = req.body;
   const newpost = new Post({
-    description,
     sellerId,
+    description,
+    senderName,
+    slot,
     status,
   });
   newpost
@@ -37,7 +39,7 @@ router.post("/", auth, (req, res) => {
 // @route api/posts
 // @descrption Put/Update a post
 // @access Private
-router.put("/", auth, (req, res) => {
+router.put("/", (req, res) => {
   Post.findOneAndUpdate(
     { _id: req.body._id },
     req.body,

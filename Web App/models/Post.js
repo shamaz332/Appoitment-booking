@@ -3,10 +3,16 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema(
   {
-    description: {
+    senderName: {
       type: String,
     },
-    sellerId: {
+    slot: {
+      type: String,
+    },
+    sellerId:{
+      type: String,
+    },
+    description:{
       type: String,
     },
     status: {

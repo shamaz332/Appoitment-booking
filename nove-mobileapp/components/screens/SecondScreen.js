@@ -17,21 +17,55 @@ import {
 import React, { useState } from "react";
 
 import { Ionicons } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
+import axios from "axios";
 
 const { width } = Dimensions.get("window");
-
 export default function ({ navigation, route }) {
   const { isDarkmode, setTheme } = useTheme();
-  const userParams = route.params.params;
-  const [user, setUser] = useState(route.params.params.user);
-  // This is to manage Modal State
+  const [user, setUser] = useState(route.params.user);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [senderName, setSenderName] = useState("");
 
-  // This is to manage TextInput State
-  const [inputValue, setInputValue] = useState("");
+  const [description, setDescription] = useState("");
+  const [slot, setSlot] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  
   const toggleModalVisibility = () => {
-    setModalVisible(!isModalVisible);
+    setModalVisible(true);
+  };
+  const setAvailabity = (availability) => {
+    setSlot(availability);
+    setModalVisible(true);
+  };
+  const onSubmitFormHandler = async () => {
+    if (!senderName || senderName === "") {
+      return;
+    }
+    setIsLoading(true);
+    const formData = {
+      description,
+      senderName,
+      sellerId:user._id,
+      slot,
+      status: "REQUESTED",
+    };
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/posts/",
+        formData
+      );
+      if (response) {
+        alert("Request Send");
+        setIsLoading(false);
+        setModalVisible(false);
+      } else {
+        throw new Error("An error has occurred");
+      }
+    } catch (error) {
+      alert("An error has occurred", error);
+      console.log(error);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -82,10 +116,10 @@ export default function ({ navigation, route }) {
                   }}
                 >
                   {" "}
-                  {availability}{" "}
+                  {user._id}{" "}
                 </Text>{" "}
                 <Button
-                  onPress={toggleModalVisibility}
+                  onPress={() => setAvailabity(availability)}
                   text="Book Appointment"
                   style={{
                     marginTop: 10,
@@ -106,14 +140,24 @@ export default function ({ navigation, route }) {
           <View style={styles.viewWrapper}>
             <View style={styles.modalView}>
               <TextInput
-                placeholder="Enter something..."
-                value={inputValue}
+                placeholder="Enter Your name"
+                value={senderName}
                 style={styles.textInput}
-                onChangeText={(value) => setInputValue(value)}
+                onChange={(e)=>setSenderName(e.target.value)}
               />
-
+  <TextInput
+  numberOfLines={4}
+                placeholder="Enter Description"
+                value={description}
+                style={styles.textInput}
+                onChange={(e)=>setDescription(e.target.value)}
+              />
               {/** This button is responsible to close the modal */}
-              <Button title="Close" onPress={toggleModalVisibility} />
+              <Button
+                text="Send"
+                onPress={onSubmitFormHandler}
+                disabled={isLoading}
+              />
             </View>
           </View>
         </Modal>
