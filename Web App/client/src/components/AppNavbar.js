@@ -108,7 +108,7 @@ const AppNavbar = (props) => {
             tag={Link}
             to="/"
           >
-            <span className="text-success font-weight-bold">CODERS</span>UNITE!
+            <span className="text-success font-weight-bold"></span>Appoitment booking
           </NavbarBrand>
           <NavbarToggler onClick={toggleNavbar} className="mr-2" />
           <Collapse isOpen={!collapsed} navbar>

@@ -69,10 +69,10 @@ router.post("/", (req, res) => {
 // @descrption updates user profile
 // @access private (needs token).
 router.post("/user", auth, (req, res) => {
-  const { username, info } = req.body;
+  const { username, slots } = req.body;
   User.findOneAndUpdate(
     { username: username }, // filter
-    { $push: { info: info } }, // update if found or upsert property
+    { $push: { slots: slots } }, // update if found or upsert property
     { new: true, select: "-password" }, // Returne doc as Updated
     (err, doc) => {
       if (err) res.status(500).json({ msg: "Something Went Wrong :(" });

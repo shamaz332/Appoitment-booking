@@ -48,7 +48,7 @@ const SinglePost = ({
   if (delpost) return <Redirect to="/api/posts" />;
 
   return (
-    <div className="PersonInfo">
+    <div className="Person">
       {!isloading ? (
         <div>
           <div className="d-flex">

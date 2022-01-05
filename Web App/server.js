@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 const config = require("config");
 const path = require("path");
 const app = express();
+var cors = require('cors')
 
+app.use(cors()) // Use this after the variable declaration
 // Body parser Middleware
 app.use(express.json());
 

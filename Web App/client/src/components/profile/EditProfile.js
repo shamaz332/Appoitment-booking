@@ -6,11 +6,10 @@ import { connect } from "react-redux";
 import { update_profile } from "./../../actions/ProfileActions";
 
 const EditProfile = ({ profile, update_profile }) => {
-  const { username, email, info } = profile.profile;
+  const { username, email, slots } = profile.profile;
   // const [Profileimg, setProfileimg] = useState(defaultDp);
   const [Profileform, setProfileform] = useState({
-    fullname: info ? info.fullname : "",
-    bio: info ? info.bio : "",
+    availability: slots ? slots.availability : "",
    
   });
 
@@ -25,7 +24,7 @@ const EditProfile = ({ profile, update_profile }) => {
     e.preventDefault();
     const formdata = {
       username,
-      info: Profileform,
+      slots: Profileform,
     };
     update_profile(JSON.stringify(formdata));
   };
@@ -40,19 +39,10 @@ const EditProfile = ({ profile, update_profile }) => {
       <hr />
 
       <FormGroup>
-        <Label>Full Name</Label>
-        <Input
-          type="text"
-          name="fullname"
-          value={Profileform.fullname}
-          onChange={handleChange}
-        />
-      </FormGroup>
-      <FormGroup>
         <Label>Appointment Slots</Label>
       
-          <input type="datetime-local"  name="bio"
-          value={Profileform.bio}
+          <input type="datetime-local"  name="availability"
+          value={Profileform.availability}
           onChange={handleChange}></input>
       </FormGroup>
 

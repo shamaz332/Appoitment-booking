@@ -1,19 +1,21 @@
+import {
+  Badge,
+  Button,
+  Container,
+  Form,
+  FormGroup,
+  FormText,
+  Input,
+  Label,
+} from "reactstrap";
+import { AddPost as NewPost, UpdatePost } from "./../actions/PostActions";
+
+import MDEditor from "@uiw/react-md-editor";
+import { Redirect } from "react-router-dom";
+import { Toggle_modal } from "./../actions/ToggleActions";
 import { connect } from "react-redux";
 import { useState } from "react";
-import { AddPost as NewPost, UpdatePost } from "./../actions/PostActions";
-import { Toggle_modal } from "./../actions/ToggleActions";
-import { Redirect } from "react-router-dom";
-import MDEditor from "@uiw/react-md-editor";
-import {
-  Button,
-  Form,
-  FormText,
-  FormGroup,
-  Container,
-  Label,
-  Input,
-  Badge,
-} from "reactstrap";
+
 const AddPost = ({ location, NewPost, UpdatePost, auth, Toggle_modal }) => {
   // this is redirected from edit button . So Filled the intitial fields and take the action UPDATE_POST
   const { id, title, body, snippet, isUpdated } = location.state;
@@ -80,7 +82,7 @@ const AddPost = ({ location, NewPost, UpdatePost, auth, Toggle_modal }) => {
               target={`_blank`}
               href="https://guides.github.com/features/mastering-markdown/#syntax"
             >
-              <Badge color="secondary">Info</Badge>
+              <Badge color="secondary"></Badge>
             </a>
           </FormText>
         </FormGroup>

@@ -41,7 +41,7 @@ const Profile = ({ match, auth, profile, get_profile, edit_profile }) => {
             {profile.profile?.username}
           </div>
           <div className="text-info display-4">
-            {profile.profile?.info?.fullname}
+            {profile.profile?.slots?.fullname}
           </div>
 
           <div className="text-muted display-5">{profile.profile?.email}</div>
