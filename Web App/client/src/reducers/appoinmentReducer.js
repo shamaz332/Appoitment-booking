@@ -1,11 +1,11 @@
-import * as types from "./../actions/types";
+import * as types from "../actions/types";
 const initState = {
   posts: [],
   onePost: {},
   loading: false,
 };
 
-const postReducer = (state = initState, action) => {
+const appoinmentReducer = (state = initState, action) => {
   switch (action.type) {
     case types.FETCH_POSTS:
       return {
@@ -35,4 +35,4 @@ const postReducer = (state = initState, action) => {
   }
 };
 
-export default postReducer;
+export default appoinmentReducer;

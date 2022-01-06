@@ -1,12 +1,12 @@
-import { combineReducers } from "redux";
-import postReducer from "./postReducer";
 import ToggleReducer from "./ToggleReducer";
+import appoinmentReducer from "./appoinmentReducer";
 import authReducer from "./authReducer";
+import { combineReducers } from "redux";
 import errorReducer from "./errorReducer";
 import profileReducer from "./profileReducer";
 
 const rootreducer = combineReducers({
-  post: postReducer,
+  post: appoinmentReducer,
   Toggle: ToggleReducer,
   auth: authReducer,
   error: errorReducer,

@@ -1,28 +1,33 @@
-import { Button, Card, CardText, CardTitle, Col, Row } from "reactstrap";
-import { FetchPosts, UpdatePost } from "./../actions/PostActions";
+import { Button, ButtonGroup, Card, CardText, CardTitle, Col, Row } from "reactstrap";
+import { FetchPosts, UpdatePost } from "./../actions/AppointmentActions";
 import React, { useEffect } from "react";
 
-import { Link } from "react-router-dom";
 import Loader from "./Loader";
-import Moment from "react-moment";
 import { connect } from "react-redux";
 
-const AllPosts = ({ FetchPosts, post, author,UpdatePost }) => {
+const AllPosts = ({ FetchPosts, post, author, UpdatePost }) => {
   useEffect(() => {
     FetchPosts(author);
   }, [FetchPosts, author]);
-  
-  const handleSubmit = (e) => {
-
-    e.preventDefault();
-    console.log("author",author)
+  const reject = (postID) => {
+    console.log("author",postID);
     const formdata = {
-      author:post._id,
+      author: postID,
       status: "REJECTED",
     };
-    console.log(   UpdatePost(formdata))
+    console.log(UpdatePost(formdata));
     UpdatePost(formdata);
   };
+  const accept = (postID) => {
+    console.log("author",postID);
+    const formdata = {
+      author: postID,
+      status: "ACCEPTED",
+    };
+    console.log(UpdatePost(formdata));
+    UpdatePost(formdata);
+  };
+
   const Allposts = post.posts.map((post) => (
     <div className="post col-md-8 mx-auto" key={post._id}>
       <Row>
@@ -37,9 +42,14 @@ const AllPosts = ({ FetchPosts, post, author,UpdatePost }) => {
             <CardText>
               <strong>Client Name :</strong> {post.senderName}
             </CardText>
-            <Button onClick={handleSubmit} disabled={post.status==="REJECTED"}>
-              {post.status === "REQUESTED" ? "ACCEPT" : "REJECTED"}
-            </Button>
+            {post.status === "REJECTED" || post.status === "ACCEPTED" ? (
+              <h3>You have {post.status.toLowerCase()} this offer</h3>
+            ) : (
+              <ButtonGroup>
+                <Button onClick={() => reject(post._id)}>Reject Request</Button>
+                <Button onClick={() => accept(post._id)}>Accept Request</Button>
+              </ButtonGroup>
+            )}
           </Card>
         </Col>
       </Row>
@@ -53,4 +63,4 @@ const AllPosts = ({ FetchPosts, post, author,UpdatePost }) => {
 const mapStateToProps = (state) => ({
   post: state.post,
 });
-export default connect(mapStateToProps, {UpdatePost, FetchPosts })(AllPosts);
+export default connect(mapStateToProps, { UpdatePost, FetchPosts })(AllPosts);

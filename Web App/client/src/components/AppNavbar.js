@@ -113,33 +113,6 @@ const AppNavbar = (props) => {
           <NavbarToggler onClick={toggleNavbar} className="mr-2" />
           <Collapse isOpen={!collapsed} navbar>
             <Nav className="ml-auto" navbar>
-              {/* <NavLink
-                tag={Link}
-                to="/api/posts"
-                onClick={closeNavbar}
-                className="my-auto"
-              >
-                Feed
-              </NavLink>
-
-              <NavLink
-                onClick={closeNavbar}
-                className="my-auto"
-                tag={Link}
-                to={{
-                  pathname: "/api/posts/newpost",
-                  state: {
-                    id: "",
-                    title: "",
-                    body: "",
-                    snippet: "",
-                    isUpdated: false,
-                  },
-                }}
-              >
-                New Post
-              </NavLink> */}
-
               {props.auth.isAuthenticated
                 ? [logoutBtn]
                 : [loginBtn, registerBtn]}
