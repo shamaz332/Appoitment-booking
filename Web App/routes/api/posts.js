@@ -41,10 +41,11 @@ router.post("/", (req, res) => {
 // @descrption Put/Update a post
 // @access Private
 router.put("/", (req, res) => {
+  const { status, author } = req.body;
+
   Post.findOneAndUpdate(
-    { _id: req.body._id },
-    req.body,
-    { upsert: true },
+    { _id: author },
+    { $set: {status:status} },
     (err, post) => {
       if (err) throw err;
       res.json(post);

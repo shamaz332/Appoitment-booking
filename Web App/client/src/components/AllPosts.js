@@ -1,7 +1,7 @@
 import { Button, Card, CardText, CardTitle, Col, Row } from "reactstrap";
+import { FetchPosts, UpdatePost } from "./../actions/PostActions";
 import React, { useEffect } from "react";
 
-import { FetchPosts } from "./../actions/PostActions";
 import { Link } from "react-router-dom";
 import Loader from "./Loader";
 import Moment from "react-moment";
@@ -11,7 +11,14 @@ const AllPosts = ({ FetchPosts, post, author }) => {
   useEffect(() => {
     FetchPosts(author);
   }, [FetchPosts, author]);
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formdata = {
+      author,
+      status: "REJECTED",
+    };
+    UpdatePost(JSON.stringify(formdata));
+  };
   const Allposts = post.posts.map((post) => (
     <div className="post col-md-8 mx-auto" key={post._id}>
       <Row>
@@ -26,7 +33,7 @@ const AllPosts = ({ FetchPosts, post, author }) => {
             <CardText>
               <strong>Client Name :</strong> {post.senderName}
             </CardText>
-            <Button disabled={post.status==="REJECTED"}>
+            <Button onClick={handleSubmit} disabled={post.status==="REJECTED"}>
               {post.status === "REQUESTED" ? "ACCEPT" : "REJECTED"}
             </Button>
           </Card>
