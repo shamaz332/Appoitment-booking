@@ -42,9 +42,9 @@ router.post("/", (req, res) => {
 // @access Private
 router.put("/", (req, res) => {
   const { status, author } = req.body;
-
+console.log(req.body)
   Post.findOneAndUpdate(
-    { _id: author },
+    { sellerId: author },
     { $set: {status:status} },
     (err, post) => {
       if (err) throw err;

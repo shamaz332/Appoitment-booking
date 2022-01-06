@@ -1,8 +1,12 @@
 import * as types from "./types";
 
 import axios from "axios";
-import { returnErrors } from "./ErrorActions";
-import { tokenConfig } from "./AuthActions";
+import {
+  returnErrors
+} from "./ErrorActions";
+import {
+  tokenConfig
+} from "./AuthActions";
 
 export const FetchPosts = (payload) => (dispatch) => {
   dispatch(setLoading());
@@ -19,8 +23,8 @@ export const FetchPosts = (payload) => (dispatch) => {
       dispatch({
         type: types.FETCH_POSTS,
         payload: res.data,
-      },    console.log(res.data))
-      
+      }, console.log(res.data))
+
     )
     .catch((err) => {
       dispatch(
@@ -35,12 +39,12 @@ export const FetchPosts = (payload) => (dispatch) => {
 
 export const UpdatePost = (payload) => (dispatch, getState) => {
   axios
-    .put("/api/posts", payload, tokenConfig(getState))
+    .put("/api/posts", payload,tokenConfig(getState) )
     .then((res) => {
       dispatch({
         type: types.UPDATE_POST,
         payload: res.data,
-      });
+      }, console.log(res));
     })
     .catch((err) => {
       dispatch(

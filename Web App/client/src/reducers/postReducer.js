@@ -13,14 +13,17 @@ const postReducer = (state = initState, action) => {
         posts: action.payload,
         loading: false,
       };
-
+      case types.UPDATE_POST:
+        return {
+          ...state,
+          profile: action.payload,
+          isLoading: false,
+          isEditing: false,
+        };
     case types.UPDATE_POST:
       return {
         ...state,
-        posts: state.posts.map((post) => {
-          if (post._id === action.payload._id) return action.payload;
-          else return post;
-        }),
+        posts: action.payload,
       };
     case types.LOADING:
       return {

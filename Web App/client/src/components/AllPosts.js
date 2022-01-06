@@ -7,17 +7,21 @@ import Loader from "./Loader";
 import Moment from "react-moment";
 import { connect } from "react-redux";
 
-const AllPosts = ({ FetchPosts, post, author }) => {
+const AllPosts = ({ FetchPosts, post, author,UpdatePost }) => {
   useEffect(() => {
     FetchPosts(author);
   }, [FetchPosts, author]);
+  
   const handleSubmit = (e) => {
+
     e.preventDefault();
+    console.log("author",author)
     const formdata = {
       author,
       status: "REJECTED",
     };
-    UpdatePost(JSON.stringify(formdata));
+    console.log(   UpdatePost(formdata))
+    UpdatePost(formdata);
   };
   const Allposts = post.posts.map((post) => (
     <div className="post col-md-8 mx-auto" key={post._id}>
@@ -49,4 +53,4 @@ const AllPosts = ({ FetchPosts, post, author }) => {
 const mapStateToProps = (state) => ({
   post: state.post,
 });
-export default connect(mapStateToProps, { FetchPosts })(AllPosts);
+export default connect(mapStateToProps, {UpdatePost, FetchPosts })(AllPosts);

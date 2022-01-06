@@ -3,6 +3,7 @@ import * as types from "./types";
 import axios from "axios";
 import { returnErrors } from "./ErrorActions";
 import { tokenConfig } from "./AuthActions";
+
 // import { tokenConfig } from "./AuthActions";
 
 export const get_profile = (username) => (dispatch) => {
@@ -31,7 +32,7 @@ export const update_profile = (payload) => (dispatch, getState) => {
       dispatch({
         type: types.UPDATE_PROFILE,
         payload: res.data,
-      })
+      },console.log(res))
     )
     .catch((err) => {
       dispatch(returnErrors(err.response.data.msg, err.response.status));
