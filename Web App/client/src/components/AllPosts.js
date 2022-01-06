@@ -17,7 +17,7 @@ const AllPosts = ({ FetchPosts, post, author,UpdatePost }) => {
     e.preventDefault();
     console.log("author",author)
     const formdata = {
-      author,
+      author:post._id,
       status: "REJECTED",
     };
     console.log(   UpdatePost(formdata))

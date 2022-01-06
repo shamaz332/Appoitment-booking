@@ -44,7 +44,7 @@ router.put("/", (req, res) => {
   const { status, author } = req.body;
 console.log(req.body)
   Post.findOneAndUpdate(
-    { sellerId: author },
+    { _id: author },
     { $set: {status:status} },
     (err, post) => {
       if (err) throw err;
