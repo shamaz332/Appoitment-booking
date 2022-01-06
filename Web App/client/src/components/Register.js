@@ -1,10 +1,10 @@
-import { Modal } from "reactstrap";
-import LogIn from "./register/LogIn";
-
 import { Toggle_Foucs, Toggle_modal } from "./../actions/ToggleActions";
-import { connect } from "react-redux";
+
+import LogIn from "./register/LogIn";
+import { Modal } from "reactstrap";
 import SignUp from "./register/SignUp";
-import GoogleConnect from "./register/GoogleConnect";
+import { connect } from "react-redux";
+
 const Register = ({ Toggle, Toggle_modal, Toggle_Foucs }) => {
   const externalCloseBtn = (
     <button
@@ -41,14 +41,7 @@ const Register = ({ Toggle, Toggle_modal, Toggle_Foucs }) => {
           </button>
         </div>
         {Toggle.focus ? <SignUp /> : <LogIn />}
-        <div className="row lines">
-          <div className="col-4"></div>
-          <h3 className="text-white mx-4">OR</h3>
-          <div className="col-4"></div>
-        </div>
-        <div className="row lines">
-          <GoogleConnect />
-        </div>
+        
       </div>
     </Modal>
   );

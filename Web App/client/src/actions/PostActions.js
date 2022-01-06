@@ -1,7 +1,8 @@
-import axios from "axios";
 import * as types from "./types";
-import { tokenConfig } from "./AuthActions";
+
+import axios from "axios";
 import { returnErrors } from "./ErrorActions";
+import { tokenConfig } from "./AuthActions";
 
 export const FetchPosts = (payload) => (dispatch) => {
   dispatch(setLoading());
@@ -14,10 +15,12 @@ export const FetchPosts = (payload) => (dispatch) => {
   axios
     .get("/api/posts", config)
     .then((res) =>
+
       dispatch({
         type: types.FETCH_POSTS,
         payload: res.data,
-      })
+      },    console.log(res.data))
+      
     )
     .catch((err) => {
       dispatch(
@@ -30,62 +33,6 @@ export const FetchPosts = (payload) => (dispatch) => {
     });
 };
 
-export const GetPost = (payload) => (dispatch) => {
-  dispatch(setLoading());
-  axios
-    .get(`/api/posts/${payload}`)
-    .then((res) =>
-      dispatch({
-        type: types.GET_POST,
-        payload: res.data,
-      })
-    )
-    .catch((err) => {
-      dispatch(
-        returnErrors(err.response.data.msg, err.response.status, types.GET_POST)
-      );
-    });
-};
-
-export const Addcomment = (id, payload) => (dispatch, getState) => {
-  axios
-    .put(`/api/posts/${id}`, payload, tokenConfig(getState))
-    .then((res) =>
-      dispatch({
-        type: types.ADD_COMMENT,
-        payload: res.data,
-      })
-    )
-    .catch((err) => {
-      dispatch(
-        returnErrors(
-          err.response.data.msg,
-          err.response.status,
-          types.ADD_COMMENT
-        )
-      );
-    });
-};
-
-export const DeletePost = (payload) => (dispatch, getState) => {
-  axios
-    .delete(`/api/posts/${payload}`, tokenConfig(getState))
-    .then(() =>
-      dispatch({
-        type: types.DELETE_POST,
-        payload,
-      })
-    )
-    .catch((err) => {
-      dispatch(
-        returnErrors(
-          err.response.data.msg,
-          err.response.status,
-          types.DELETE_POST
-        )
-      );
-    });
-};
 export const UpdatePost = (payload) => (dispatch, getState) => {
   axios
     .put("/api/posts", payload, tokenConfig(getState))
@@ -106,30 +53,6 @@ export const UpdatePost = (payload) => (dispatch, getState) => {
     });
 };
 
-export const AddPost = (payload) => (dispatch, getState) => {
-  axios
-    .post("/api/posts", payload, tokenConfig(getState))
-    .then((res) =>
-      dispatch({
-        type: types.ADD_POST,
-        payload: res.data,
-      })
-    )
-    .catch((err) => {
-      dispatch(
-        returnErrors(err.response.data.msg, err.response.status, types.ADD_POST)
-      );
-    });
-};
-
-export const DoVote = (id, payload) => (dispatch, getState) => {
-  axios.post(`/api/posts/${id}`, payload, tokenConfig(getState)).then((res) =>
-    dispatch({
-      type: types.DO_VOTE,
-      payload: res.data,
-    })
-  );
-};
 export const setLoading = () => {
   return {
     type: types.LOADING,

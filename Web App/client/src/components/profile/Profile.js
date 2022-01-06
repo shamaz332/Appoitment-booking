@@ -6,11 +6,11 @@ import { Button } from "reactstrap";
 import EditProfile from "./EditProfile";
 import Loader from "./../Loader";
 import { connect } from "react-redux";
-import defaultDp from "./../../images/defaultDp.png";
 
 const Profile = ({ match, auth, profile, get_profile, edit_profile }) => {
   useEffect(() => {
     get_profile(match.params.username);
+    
   }, [get_profile, match.params.username]);
 
   if (profile.isLoading) return <Loader />;
@@ -18,16 +18,7 @@ const Profile = ({ match, auth, profile, get_profile, edit_profile }) => {
   return (
     <div>
       <div className="row">
-        <div className="col-sm-3 text-center m-auto">
-          <img
-            src={defaultDp}
-            className="rounded img-fluid"
-            alt="defaultDp"
-            width="200px"
-            height="200px"
-          />
-        </div>
-        <div className="col-sm-9">
+        <div className="col-sm-12">
           {match.params.username === auth.user?.username ? (
             <Button
               style={{ float: "right" }}
@@ -48,8 +39,8 @@ const Profile = ({ match, auth, profile, get_profile, edit_profile }) => {
         </div>
       </div>
       <hr />
-      <h2 className="text-muted m-4">Appointment Requests {match.params.username}</h2>
-      {/* <AllPosts author={match.params.username} /> */}
+      <h2 className="text-muted m-4">Appointment Requests For {auth.user?.username}</h2>
+      <AllPosts author={profile.profile?._id} />
     </div>
   );
 };
